@@ -3,55 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>weather app</title>
+    <meta name="theme-color" content="#0cbb69">
+    <title>Live Weather</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
     <div class="bgVideo">
-        <video autoplay loop muted  >
-            <source  class="video" src="videos/rainy.mp4"></video>
+        <video id="bgVideo" autoplay loop muted playsinline>
+            <source class="video" src="videos/rainy.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay" aria-hidden="true"></div>
     </div>
 
-
-
-
-    <div class="card">
-       
-        <div class="search">
-            <input type="text" placeholder="Enter city name to check weather" spellcheck="false">
-            <button><img src="images/search.png"></button>
-        </div>
-
-
-        <div class="weather">
-            <img src="images/rain.png" class="weather-icon">
-            <h2 class="status">rainy</h2>
-            <h1 class="temp">22°C</h1>
-            <h2 class="city">new delhi</h2>
-            <div class="detail">
-                <div class="col">
-                    <img src="images/humidity.png" alt="#">
-                    <div>
-                        <p class="humidity">50%</p>
-                        <p>Humidity</p>
+    <main class="container">
+        <div class="card">
+            <header class="header">
+                <h1 class="app-title">Live Weather</h1>
+                <div class="header-actions">
+                    <button class="geo-btn" type="button" aria-label="Use my current location">Use my location</button>
+                    <div class="unit-toggle" role="group" aria-label="Unit toggle">
+                        <button class="unit-btn active" data-unit="metric" aria-pressed="true">°C</button>
+                        <button class="unit-btn" data-unit="imperial" aria-pressed="false">°F</button>
                     </div>
                 </div>
-                <div class="col">
-                    <img src="images/wind.png" alt="#">
-                    <div>
-                        <p class="wind">50km/h</p>
-                        <p>wind speed</p>
+            </header>
+
+            <form class="search" autocomplete="off">
+                <label for="searchCity" class="sr-only">Enter city name</label>
+                <input id="searchCity" type="text" placeholder="Search city..." spellcheck="false" aria-label="Enter city name">
+                <button type="submit" aria-label="Search"><img src="images/search.png" alt="Search"></button>
+            </form>
+
+            <div class="status-bar" aria-live="polite" hidden></div>
+
+            <div class="weather" data-loading="false">
+                <div class="hero">
+                    <img src="images/rain.png" class="weather-icon" alt="Weather icon">
+                    <div class="temp-block">
+                        <h1 class="temp">22°C</h1>
+                        <p class="feels">Feels like 22°</p>
+                    </div>
+                </div>
+                <h2 class="status">Rainy</h2>
+                <h2 class="city">New Delhi</h2>
+                <div class="detail">
+                    <div class="col">
+                        <img src="images/humidity.png" alt="Humidity icon">
+                        <div>
+                            <p class="humidity">50%</p>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="images/wind.png" alt="Wind icon">
+                        <div>
+                            <p class="wind">18 km/h</p>
+                            <p>Wind</p>
+                        </div>
                     </div>
                 </div>
 
+                <div class="extra">
+                    <div class="extra-item">
+                        <p class="label">Pressure</p>
+                        <p class="value pressure">—</p>
+                    </div>
+                    <div class="extra-item">
+                        <p class="label">Visibility</p>
+                        <p class="value visibility">—</p>
+                    </div>
+                    <div class="extra-item">
+                        <p class="label">Updated</p>
+                        <p class="value updated">—</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" hidden>
+                <div class="spinner" role="status" aria-label="Loading"></div>
+                <p>Loading weather...</p>
             </div>
         </div>
-    </div>
+    </main>
 
-
-
-    <script src="script.js">   </script>
+    <script src="script.js"></script>
 </body>
 </html>
